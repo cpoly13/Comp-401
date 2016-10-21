@@ -10,7 +10,7 @@ import a6novice.*;
 
 /**
  * Junit tests for Coordinate and Pixel Iterator Classes
- * @author Chris Polychronides
+ * @author Chris Poly
  *
  */
 public class A6NoviceTest {
