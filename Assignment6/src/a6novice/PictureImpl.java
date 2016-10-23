@@ -1,5 +1,7 @@
 package a6novice;
 
+import java.util.Iterator;
+
 public class PictureImpl extends AnyPicture implements Picture {
 	
 	private Pixel[][] pixelArray;
@@ -24,7 +26,7 @@ public class PictureImpl extends AnyPicture implements Picture {
 			throw new RuntimeException("Error, null reference");
 		}
 
-		pixelArray[x][y] = p;
+		pixelArray[x][height-1-y] = p;
 	}
 
 	public Pixel getPixel(int x, int y) {
@@ -32,9 +34,15 @@ public class PictureImpl extends AnyPicture implements Picture {
 			throw new RuntimeException("Error, negative parameters");
 		}
 
-		return pixelArray[x][y];
+		return pixelArray[x][height-1-y];
 
 	}
+
+	
+
+	
+
+	
 	
 	
 

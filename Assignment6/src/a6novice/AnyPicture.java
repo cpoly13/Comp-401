@@ -1,5 +1,7 @@
 package a6novice;
 
+import java.util.Iterator;
+
 abstract public class AnyPicture implements Picture {
 
 	int width;
@@ -67,6 +69,55 @@ abstract public class AnyPicture implements Picture {
 		SubPicture newSub=new SubPictureImpl(this,xOffset,yOffset, width, height);
 		
 		return newSub;
+	}
+	
+	public SubPicture extract(Coordinate corner_a, Coordinate corner_b){
+		int x;
+		int y;
+		int width;
+		int height;
+		
+		if(corner_a.getX()<=corner_b.getX()){
+		x=corner_a.getX();
+		width=corner_b.getX()-corner_a.getX();
+		}
+		else{
+			x=corner_b.getX();
+			width=corner_a.getX()-corner_b.getX();
+		}
+		
+		if(corner_a.getY()<corner_b.getY()){
+			y=corner_a.getY();
+			height=corner_b.getY()-corner_a.getY();
+		}
+		
+		else {
+			y=corner_b.getY();
+			height= corner_a.getY()-corner_b.getY();
+		}
+		
+		SubPicture newSub= new SubPictureImpl(this,x,y,width,height);
+		return newSub;
+	}
+	@Override
+	public void setPixel(Coordinate c, Pixel p) {
+		// TODO Auto-generated method stub
+		
+		setPixel(c.getX(),c.getY(),p);
+		
+	}
+
+	@Override
+	public Pixel getPixel(Coordinate c) {
+		// TODO Auto-generated method stub
+		return getPixel(c.getX(),c.getY());
+	}
+	
+	@Override
+	public Iterator<Pixel> iterator() {
+		// TODO Auto-generated method stub
+		Iterator <Pixel> iterator= new RowMajorPixelIterator(this);
+		return iterator;
 	}
 
 }
