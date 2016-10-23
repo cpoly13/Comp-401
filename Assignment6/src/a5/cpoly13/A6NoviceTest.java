@@ -164,6 +164,33 @@ public class A6NoviceTest {
 						+subToTest.getPixel(i, n).getChar());
 			}
 		}
+		
+		Picture toTest2 = new PictureImpl(2, 2);
+
+		for (int i = 0; i < toTest2.getWidth(); i++) {
+			for (int n = 0; n < toTest2.getHeight(); n++) {
+				Pixel random = new GrayPixel(Math.random());
+				Coordinate xy = new Coordinate(i, n);
+				toTest2.setPixel(xy, random);
+			}
+		}
+		SubPicture sub2 = toTest2.extract(0, 0, 1, 1);
+		Coordinate x = new Coordinate(12, 100);
+		Coordinate y = new Coordinate(512, 1000);
+		try{
+		SubPicture subToTest2 = toTest2.extract(x, y);
+		for (int i = 0; i < sub2.getWidth(); i++) {
+			for (int n = 0; n < sub2.getHeight(); n++) {
+				assertEquals("SubPictures don't match", +sub2.getPixel(i, n).getChar(),
+						+subToTest2.getPixel(i, n).getChar());
+			}
+		}
+		fail("Expected IllegalArgumentExcpetion");}
+		catch(IllegalArgumentException e){
+			
+		}
+
+		
 
 	}
 	/*
@@ -202,6 +229,16 @@ public class A6NoviceTest {
 				y++;
 			}
 
+		}
+		
+		try{
+			pixels.next();
+			fail("Error, should throw UnsupportedOperationException");
+		}
+		catch (UnsupportedOperationException e){
+			}
+		catch (RuntimeException e){
+			fail("Error, should throw UnsupportedOperationException");
 		}
 
 	}

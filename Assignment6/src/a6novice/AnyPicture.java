@@ -4,12 +4,12 @@ import java.util.Iterator;
 
 abstract public class AnyPicture implements Picture {
 
-	int width;
-	int height;
+	protected int width;
+	protected int height;
 
 	public AnyPicture(int width, int height) {
 		if (width < 0 || height < 0) {
-			throw new RuntimeException("Error, negative parameters");
+			throw new IllegalArgumentException("Error, negative parameters");
 		}
 
 		this.width = width;
@@ -31,7 +31,7 @@ abstract public class AnyPicture implements Picture {
 
 	public int countRange(double low, double high) {
 		if (low < 0 || low > 1 || high < 0 || high > 1) {
-			throw new RuntimeException("Error, range out of bounds");
+			throw new IllegalArgumentException("Error, range out of bounds");
 		}
 
 		int count = 0;
@@ -76,6 +76,7 @@ abstract public class AnyPicture implements Picture {
 		int y;
 		int width;
 		int height;
+		
 		
 		if(corner_a.getX()<=corner_b.getX()){
 		x=corner_a.getX();

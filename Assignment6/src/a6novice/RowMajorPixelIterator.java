@@ -35,16 +35,19 @@ public class RowMajorPixelIterator implements Iterator <Pixel> {
 
 	@Override
 	public Pixel next() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stubb
 		
 		if(x+1<width){
 			x++;
 			return pic.getPixel(x, y);
 		}
-		else{
+		else if( y+1<height){
 			y++;
 			x=0;
 			return pic.getPixel(x, y);
+		}
+		else{
+			throw new UnsupportedOperationException();
 		}
 		
 		
