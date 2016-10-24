@@ -1,6 +1,7 @@
 package a6novice;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class RowMajorPixelIterator implements Iterator <Pixel> {
 	
@@ -47,7 +48,7 @@ public class RowMajorPixelIterator implements Iterator <Pixel> {
 			return pic.getPixel(x, y);
 		}
 		else{
-			throw new UnsupportedOperationException();
+			throw new NoSuchElementException();
 		}
 		
 		

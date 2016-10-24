@@ -58,7 +58,7 @@ abstract public class AnyPicture implements Picture {
 
 			}
 
-			System.out.println();
+			System.out.print("\n");
 
 		}
 		
