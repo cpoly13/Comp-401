@@ -92,8 +92,8 @@ abstract public class AnyPicture implements Picture {
 			y = corner_a.getY();
 			height = Math.abs(corner_b.getY() - corner_a.getY());
 
-		SubPicture newSub = new SubPictureImpl(this, x, y, width, height);
-		return newSub;
+		
+		return extract(x,y,width,height);
 	}
 	@Override
 	public void setPixel(Coordinate c, Pixel p) {
