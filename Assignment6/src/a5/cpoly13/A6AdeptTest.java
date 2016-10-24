@@ -121,6 +121,9 @@ public class A6AdeptTest {
 			}
 
 		}
+		if(!pixels.hasNext()){
+			fail("Can't perform test, faulty iterator");
+		}
 
 		while (pixels.hasNext()) {
 			assertEquals("Sample Iterator method not working", testPic.getPixel(x, y).getChar(),
@@ -155,7 +158,9 @@ public class A6AdeptTest {
 			}
 
 		}
-		
+		if(!windows.hasNext()){
+			fail("Can't perform test, faulty iterator");
+		}
 		while (windows.hasNext()){
 			assertEquals("SubPictures don't match iterator windows",testPic.extract(x, y, 3, 2).getPixel(1, 1).getChar(),
 					windows.next().getPixel(1,1).getChar());
@@ -189,6 +194,9 @@ public class A6AdeptTest {
 				testPic.setPixel(xy, random);
 			}
 
+		}
+		if(!tiles.hasNext()){
+			fail("Can't perform test, faulty iterator");
 		}
 		
 		while (tiles.hasNext()){

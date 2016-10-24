@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 /*
  * Creates Window Iterator object that returns SubPictures
  *  from dragging a "window" over picture in horizontal top down order
+ *  window placement increases by one index with each step
  *  Author: Chris Polychronides
  */
 public class WindowIterator implements Iterator<SubPicture> {
@@ -20,7 +21,7 @@ public class WindowIterator implements Iterator<SubPicture> {
 		this.pic=pic;
 		this.window_width=window_width;
 		this.window_height=window_height;
-		x=-1;
+		x=-1; //starts at -1 so that first next() starts at beginning 0,0 index 
 		y=0;
 	}
 	
@@ -42,7 +43,11 @@ public class WindowIterator implements Iterator<SubPicture> {
 		return false;
 		}
 	}
-
+	/*
+	 * Returns next"windowed" sub-picture after moving "window" area to next 
+	 * appropriate index
+	 * Output: SubPicture
+	 */
 	@Override
 	public SubPicture next() {
 		if(x<0){

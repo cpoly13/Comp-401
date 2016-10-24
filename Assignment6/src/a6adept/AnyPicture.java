@@ -23,15 +23,11 @@ abstract public class AnyPicture implements Picture {
 		this.height = height;
 
 	}
-	/*
-	 * Width getter
-	 */
+	
 	public int getWidth() {
 		return width;
 	}
-	/*
-	 * Height getter
-	 */
+	
 	public int getHeight() {
 		return height;
 	}
@@ -66,7 +62,7 @@ abstract public class AnyPicture implements Picture {
 
 	}
 	/*
-	 * Prints picture
+	 * Prints picture in row major order
 	 * Output: Picture to console
 	 */
 	public void print() {
@@ -123,7 +119,7 @@ abstract public class AnyPicture implements Picture {
 		return newSub;
 	}
 	/*
-	 * Sets pixel into picture
+	 * Sets pixel into picture using Coordinate objects
 	 * Input: Coordinate location and pixel
 	 */
 	@Override
@@ -135,7 +131,7 @@ abstract public class AnyPicture implements Picture {
 	}
 	
 	/*
-	 * Gets Pixel from Coordinate location
+	 * Gets Pixel from Coordinate location using coordinate x & y values
 	 * Input:Coordinate
 	 * Output:Pixel from Picture
 	 */
@@ -175,16 +171,41 @@ abstract public class AnyPicture implements Picture {
 		return sampleSkipper;
 	}
 	/*
-	 * Creates window iterator object
+	 * Creates window iterator object that iterates through picture with "window"
+	 *  single increment window boundaries
 	 * Input: width and height for window iterator
 	 * Output: Window iterator
+	 * Returns Illegal Argument Exception if arguments are negative or out of bounds
 	 */
 	public Iterator<SubPicture> window (int window_width, int window_height){
+		if(window_width<0 || window_height<0){
+			throw new IllegalArgumentException("window width/height values are negative");
+		}
 		
+		if(window_width>width || window_height>height){
+			throw new IllegalArgumentException("Window width/height out of picture bounds");
+		}
 		Iterator<SubPicture> subWindow= new WindowIterator (this, window_width, window_height);
 		
 		return subWindow;
 		
 	}
+	/*
+	 * Creates tile iterator object that iterates through picture with subsequent "tile" boundaries
+	 * Input: width and height for tile iterator
+	 * Output: Tile iterator
+	 * Returns Illegal Argument Exception if arguments are negative or out of bounds
+	 */
+	public Iterator<SubPicture> tile(int tile_width, int tile_height){
+		if(tile_width<0 || tile_height<0){
+			throw new IllegalArgumentException("Tile width/height values are negative");
+		}
+		if(tile_width>width || tile_height>height){
+			throw new IllegalArgumentException("Tile width/height out of picture bounds");
+		}
+		Iterator<SubPicture> subTile= new TileIterator(this,tile_width,tile_height);
+		return subTile;
+	}
+
 
 }
