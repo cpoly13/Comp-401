@@ -3,6 +3,7 @@ package a5.cpoly13;
 import static org.junit.Assert.*;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import org.junit.Test;
 
@@ -404,7 +405,7 @@ public class A6AdeptTest {
 			pixels.next();
 			fail("Error, should throw UnsupportedOperationException");
 		}
-		catch (UnsupportedOperationException e){
+		catch (NoSuchElementException e){
 			}
 		catch (RuntimeException e){
 			fail("Error, should throw UnsupportedOperationException");

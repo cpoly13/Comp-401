@@ -1,6 +1,7 @@
 package a6adept;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /*
  * Pixel Iterator that iterates through picture from top row
@@ -57,7 +58,7 @@ public class RowMajorPixelIterator implements Iterator<Pixel> {
 			x = 0;
 			return pic.getPixel(x, y);
 		} else {
-			throw new UnsupportedOperationException();
+			throw new NoSuchElementException();
 		}
 
 	}

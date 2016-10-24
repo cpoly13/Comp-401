@@ -174,5 +174,17 @@ abstract public class AnyPicture implements Picture {
 		Iterator<Pixel> sampleSkipper = new SkippingIterator(this, init_x, init_y, dx, dy);
 		return sampleSkipper;
 	}
+	/*
+	 * Creates window iterator object
+	 * Input: width and height for window iterator
+	 * Output: Window iterator
+	 */
+	public Iterator<SubPicture> window (int window_width, int window_height){
+		
+		Iterator<SubPicture> subWindow= new WindowIterator (this, window_width, window_height);
+		
+		return subWindow;
+		
+	}
 
 }
