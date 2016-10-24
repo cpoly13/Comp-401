@@ -21,7 +21,6 @@ public class RowMajorPixelIterator implements Iterator <Pixel> {
 
 	@Override
 	public boolean hasNext() {
-		// TODO Auto-generated method stub
 		
 		if(x+1<width){
 			return true;
@@ -36,7 +35,6 @@ public class RowMajorPixelIterator implements Iterator <Pixel> {
 
 	@Override
 	public Pixel next() {
-		// TODO Auto-generated method stubb
 		
 		if(x+1<width){
 			x++;

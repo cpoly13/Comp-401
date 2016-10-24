@@ -12,5 +12,6 @@ public interface Picture extends Iterable<Pixel> {
 	public void print();
 	public SubPicture extract(int xOffset, int yOffset, int width, int height);
 	public SubPicture extract (Coordinate corner_a, Coordinate corner_b );
+	
 
 }

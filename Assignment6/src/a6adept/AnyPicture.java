@@ -96,24 +96,19 @@ abstract public class AnyPicture implements Picture {
 		int y;
 		int width;
 		int height;
-
-		if (corner_a.getX() <= corner_b.getX()) {
+		
+		if(corner_a.getX()>=this.width || corner_b.getX()>=this.width){
+			throw new IllegalArgumentException("Coordinate out of bounds");
+		}
+		
+		if(corner_a.getY()>=this.height || corner_b.getY()>=this.height){
+			throw new IllegalArgumentException("Coordinate out of bounds");
+		}
 			x = corner_a.getX();
-			width = corner_b.getX() - corner_a.getX();
-		} else {
-			x = corner_b.getX();
-			width = corner_a.getX() - corner_b.getX();
-		}
+			width =Math.abs(corner_b.getX() - corner_a.getX());
 
-		if (corner_a.getY() < corner_b.getY()) {
 			y = corner_a.getY();
-			height = corner_b.getY() - corner_a.getY();
-		}
-
-		else {
-			y = corner_b.getY();
-			height = corner_a.getY() - corner_b.getY();
-		}
+			height = Math.abs(corner_b.getY() - corner_a.getY());
 
 		SubPicture newSub = new SubPictureImpl(this, x, y, width, height);
 		return newSub;

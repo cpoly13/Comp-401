@@ -2,6 +2,8 @@ package a6novice;
 
 import java.util.Iterator;
 
+
+
 abstract public class AnyPicture implements Picture {
 
 	protected int width;
@@ -71,38 +73,31 @@ abstract public class AnyPicture implements Picture {
 		return newSub;
 	}
 	
-	public SubPicture extract(Coordinate corner_a, Coordinate corner_b){
+	public SubPicture extract(Coordinate corner_a, Coordinate corner_b) {
 		int x;
 		int y;
 		int width;
 		int height;
 		
-		
-		if(corner_a.getX()<=corner_b.getX()){
-		x=corner_a.getX();
-		width=corner_b.getX()-corner_a.getX();
-		}
-		else{
-			x=corner_b.getX();
-			width=corner_a.getX()-corner_b.getX();
+		if(corner_a.getX()>=this.width || corner_b.getX()>=this.width){
+			throw new IllegalArgumentException("Coordinate out of bounds");
 		}
 		
-		if(corner_a.getY()<corner_b.getY()){
-			y=corner_a.getY();
-			height=corner_b.getY()-corner_a.getY();
+		if(corner_a.getY()>=this.height || corner_b.getY()>=this.height){
+			throw new IllegalArgumentException("Coordinate out of bounds");
 		}
-		
-		else {
-			y=corner_b.getY();
-			height= corner_a.getY()-corner_b.getY();
-		}
-		
-		SubPicture newSub= new SubPictureImpl(this,x,y,width,height);
+			x = corner_a.getX();
+			width =Math.abs(corner_b.getX() - corner_a.getX());
+
+			y = corner_a.getY();
+			height = Math.abs(corner_b.getY() - corner_a.getY());
+
+		SubPicture newSub = new SubPictureImpl(this, x, y, width, height);
 		return newSub;
 	}
 	@Override
 	public void setPixel(Coordinate c, Pixel p) {
-		// TODO Auto-generated method stub
+		
 		
 		setPixel(c.getX(),c.getY(),p);
 		
@@ -110,13 +105,13 @@ abstract public class AnyPicture implements Picture {
 
 	@Override
 	public Pixel getPixel(Coordinate c) {
-		// TODO Auto-generated method stub
+		
 		return getPixel(c.getX(),c.getY());
 	}
 	
 	@Override
 	public Iterator<Pixel> iterator() {
-		// TODO Auto-generated method stub
+		
 		Iterator <Pixel> iterator= new RowMajorPixelIterator(this);
 		return iterator;
 	}
