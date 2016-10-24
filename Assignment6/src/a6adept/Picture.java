@@ -1,6 +1,9 @@
 package a6adept;
 import java.util.Iterator;
-
+/*
+ * Picture interface with list of methods to implement
+ * Author: Chris Polychronides
+ */
 public interface Picture extends Iterable<Pixel> {
 	
 	public int getWidth();

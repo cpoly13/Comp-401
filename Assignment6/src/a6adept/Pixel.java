@@ -1,5 +1,8 @@
 package a6adept;
-
+/*
+ * Pixel interface with methods to implement
+ * Author: Chris Polychronides
+ */
 public interface Pixel {
 
 	public double getRed();
