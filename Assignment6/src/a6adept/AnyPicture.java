@@ -159,7 +159,7 @@ abstract public class AnyPicture implements Picture {
 	 * Returns Illegal Argument on out of bounds and negative parameters 
 	 */
 	public Iterator<Pixel> sample(int init_x, int init_y, int dx, int dy) {
-		if (dx < 0 || dy < 0 || init_x < 0 || init_y < 0) {
+		if (dx <= 0 || dy <=0 || init_x < 0 || init_y < 0) {
 			throw new IllegalArgumentException("Sample parameters are negative");
 		}
 
@@ -178,7 +178,7 @@ abstract public class AnyPicture implements Picture {
 	 * Returns Illegal Argument Exception if arguments are negative or out of bounds
 	 */
 	public Iterator<SubPicture> window (int window_width, int window_height){
-		if(window_width<0 || window_height<0){
+		if(window_width<=0 || window_height<=0){
 			throw new IllegalArgumentException("window width/height values are negative");
 		}
 		
@@ -197,7 +197,7 @@ abstract public class AnyPicture implements Picture {
 	 * Returns Illegal Argument Exception if arguments are negative or out of bounds
 	 */
 	public Iterator<SubPicture> tile(int tile_width, int tile_height){
-		if(tile_width<0 || tile_height<0){
+		if(tile_width<=0 || tile_height<=0){
 			throw new IllegalArgumentException("Tile width/height values are negative");
 		}
 		if(tile_width>width || tile_height>height){
