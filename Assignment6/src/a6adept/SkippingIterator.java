@@ -1,5 +1,6 @@
 package a6adept;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 /*
  * Iterator object class that "skips" over pixels in picture
  * by argument set parameters
@@ -50,7 +51,7 @@ public class SkippingIterator implements Iterator<Pixel> {
 	 */
 	@Override
 	public Pixel next() {
-		// TODO Auto-generated method stub
+		
 		if (x<init_x){
 			x++;
 			return pic.getPixel(x, y);
@@ -67,7 +68,7 @@ public class SkippingIterator implements Iterator<Pixel> {
 		}
 		
 		else{
-				throw new UnsupportedOperationException();
+				throw new NoSuchElementException();
 		}
 	}
 	
