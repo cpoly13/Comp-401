@@ -32,10 +32,10 @@ public class TileIterator implements Iterator<SubPicture> {
 	 */
 	@Override
 	public boolean hasNext() {
-		if(x+2*tile_width<pic.getWidth()){
+		if(x+tile_width<pic.getWidth()){
 			return true;
 		}
-		else if(y+2*tile_height<pic.getHeight()){
+		else if(y+tile_height<pic.getHeight()){
 			return true;
 		}
 		
@@ -55,12 +55,12 @@ public class TileIterator implements Iterator<SubPicture> {
 			SubPicture subPic= new SubPictureImpl(pic,x,y,tile_width,tile_height);
 			return subPic;
 		}
-		else if(x+2*tile_width<pic.getWidth()){
+		else if(x+tile_width<pic.getWidth()){
 			x+=tile_width;
 			SubPicture subPic= new SubPictureImpl(pic,x,y,tile_width,tile_height);
 			return subPic;
 		}
-		else if(y+2*tile_height<pic.getHeight()){
+		else if(y+tile_height<pic.getHeight()){
 			x=0;
 			y+=tile_height;
 			SubPicture subPic= new SubPictureImpl(pic,x,y,tile_width,tile_height);
