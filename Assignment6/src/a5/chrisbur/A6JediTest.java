@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import a6jedi.*;
 
-@SuppressWarnings("Duplicates")
 public class A6JediTest {
 
     public static final Pixel RED = new ColorPixel(1, 0, 0);
@@ -18,44 +17,43 @@ public class A6JediTest {
     public static final Pixel WHITE = new GrayPixel(1);
     public static final Pixel GRAY = new GrayPixel(.5);
 
-
     static public String[] getTestNames() {
-        return new String[]{"zigZagTest"};
+	return new String[] { "zigZagTest" };
     }
 
     public static Picture getPicture() {
-        Picture picture = new PictureImpl(4, 2);
-        picture.setPixel(0, 0, RED);
-        picture.setPixel(1, 0, GREEN);
-        picture.setPixel(2, 0, BLUE);
-        picture.setPixel(3, 0, WHITE);
+	Picture picture = new PictureImpl(4, 2);
+	picture.setPixel(0, 0, RED);
+	picture.setPixel(1, 0, GREEN);
+	picture.setPixel(2, 0, BLUE);
+	picture.setPixel(3, 0, WHITE);
 
-        picture.setPixel(0, 1, BLACK);
-        picture.setPixel(1, 1, GRAY);
-        picture.setPixel(2, 1, GREEN);
-        picture.setPixel(3, 1, WHITE);
+	picture.setPixel(0, 1, BLACK);
+	picture.setPixel(1, 1, GRAY);
+	picture.setPixel(2, 1, GREEN);
+	picture.setPixel(3, 1, WHITE);
 
-        return picture;
+	return picture;
     }
 
     @Test
     public void zigZagTest() {
-        Iterator<Pixel> iter = getPicture().zigzag();
-        assertEquals(.299, iter.next().getIntensity(), .001);
-        assertTrue(iter.hasNext());
-        assertEquals(0.587, iter.next().getIntensity(), .001);
-        assertTrue(iter.hasNext());
-        assertEquals(0.0, iter.next().getIntensity(), .001);
-        assertTrue(iter.hasNext());
-        assertEquals(0.5, iter.next().getIntensity(), .001);
-        assertTrue(iter.hasNext());
-        assertEquals(0.114, iter.next().getIntensity(), .001);
-        assertTrue(iter.hasNext());
-        assertEquals(1.0, iter.next().getIntensity(), .001);
-        assertTrue(iter.hasNext());
-        assertEquals(0.587, iter.next().getIntensity(), .001);
-        assertTrue(iter.hasNext());
-        assertEquals(1.0, iter.next().getIntensity(), .001);
-        assertFalse(iter.hasNext());
+	Iterator<Pixel> iter = getPicture().zigzag();
+	assertEquals(.299, iter.next().getIntensity(), .001);
+	assertTrue(iter.hasNext());
+	assertEquals(0.587, iter.next().getIntensity(), .001);
+	assertTrue(iter.hasNext());
+	assertEquals(0.0, iter.next().getIntensity(), .001);
+	assertTrue(iter.hasNext());
+	assertEquals(0.5, iter.next().getIntensity(), .001);
+	assertTrue(iter.hasNext());
+	assertEquals(0.114, iter.next().getIntensity(), .001);
+	assertTrue(iter.hasNext());
+	assertEquals(1.0, iter.next().getIntensity(), .001);
+	assertTrue(iter.hasNext());
+	assertEquals(0.587, iter.next().getIntensity(), .001);
+	assertTrue(iter.hasNext());
+	assertEquals(1.0, iter.next().getIntensity(), .001);
+	assertFalse(iter.hasNext());
     }
 }

@@ -32,17 +32,17 @@ public class A6JediTest {
 	p.setPixel(0, 1, p01);
 	p.setPixel(1, 0, p10);
 	p.setPixel(1, 1, p11);
-	
+
 	Pixel[] pix = new Pixel[] { p00, p10, p01, p11 };
 
 	Iterator<Pixel> iter = p.zigzag();
 	assertTrue(iter instanceof Iterator);
-	
+
 	int i = 0;
 	try {
 	    while (iter.hasNext()) {
-		if (iter.next().getIntensity() != pix[i].getIntensity()) 
-			fail("Pixels not equal at i{" + i + "}");
+		if (iter.next().getIntensity() != pix[i].getIntensity())
+		    fail("Pixels not equal at i{" + i + "}");
 		i++;
 	    }
 	} catch (IndexOutOfBoundsException e) {

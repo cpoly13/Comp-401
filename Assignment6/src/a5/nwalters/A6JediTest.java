@@ -12,24 +12,24 @@ import a6adept.SubPicture;
 
 public class A6JediTest {
 
-  static public String[] getTestNames() {
-    String[] test_names = { "windowIteratorTest" };
+    static public String[] getTestNames() {
+	String[] test_names = { "windowIteratorTest" };
 
-    return test_names;
-  }
+	return test_names;
+    }
 
-  // Test if window_iterator throws exceptions when expected
-  @Test
-  public void windowIteratorTest() {
-    Picture p = new PictureImpl(15, 10);
-    Iterator<SubPicture> windowIter = p.window(3, 2);
-    while (windowIter.hasNext()) {
-      windowIter.next();
+    // Test if window_iterator throws exceptions when expected
+    @Test
+    public void windowIteratorTest() {
+	Picture p = new PictureImpl(15, 10);
+	Iterator<SubPicture> windowIter = p.window(3, 2);
+	while (windowIter.hasNext()) {
+	    windowIter.next();
+	}
+	try {
+	    windowIter.next();
+	    fail("Expected java.util.NoSuchElementException");
+	} catch (java.util.NoSuchElementException e) {
+	}
     }
-    try {
-      windowIter.next();
-      fail("Expected java.util.NoSuchElementException");
-    } catch (java.util.NoSuchElementException e) {
-    }
-  }
 }
