@@ -32,7 +32,7 @@ public class A6NoviceTest {
 	Pixel p = new GrayPixel(0.5);
 	pic.setPixel(6, 7, p);
 	assertEquals("getPixel() returns incorrect value", p, pic.getPixel(c));
-	assertEquals("Extract method did not return correct Subpicture width", picExtract.getWidth(), sub.getWidth());
+	assertEquals("Extract method did not return correct Subpicture width", sub.getWidth(), picExtract.getWidth());
 	assertEquals("Extract method did not return correct Subpicture height", picExtract.getHeight(),
 		sub.getHeight());
 	assertEquals("Extract method did not return correct Subpicture source", picExtract.getSource(),
