@@ -73,25 +73,46 @@ abstract public class AnyPicture implements Picture {
 		return newSub;
 	}
 	
-	public SubPicture extract(Coordinate corner_a, Coordinate corner_b){
+	/*
+	 * Extracts Sub-Picture from Picture
+	 * Input:Coordinate objects for opposite ends of Sub-picture
+	 * Output:Sub-Picture extracted between coordinate locations
+	 */
+	public SubPicture extract(Coordinate corner_a, Coordinate corner_b) {
 		
+		if(corner_a==null || corner_b==null ){
+			throw new IllegalArgumentException("One or more Coordinates are null");
+		}
 		
 		int x;
 		int y;
 		int width;
 		int height;
-
+		
+		if(corner_a.getX()<corner_b.getX()){
 		x=corner_a.getX();
-		y=corner_a.getX();
-		width=1+(corner_b.getX()-corner_a.getX());
-		height=1+(corner_b.getY()-corner_a.getY());
+		}
+		else{
+			x=corner_b.getX();
+		}
+		if(corner_a.getY()<corner_b.getY()){
+		y=corner_a.getY();
+		}
+		else{
+			y=corner_b.getY();
+		}
+		width=1+Math.abs(corner_b.getX()-corner_a.getX());
+		height=1+Math.abs(corner_b.getY()-corner_a.getY());
 
 		SubPicture newSub = new SubPictureImpl(this, x, y, width, height);
 		return newSub;
 	}
 	@Override
 	public void setPixel(Coordinate c, Pixel p) {
-		// TODO Auto-generated method stub
+		
+		if (c==null){
+			throw new IllegalArgumentException("Coordinate can't be null");
+		}
 		
 		setPixel(c.getX(),c.getY(),p);
 		
@@ -99,7 +120,9 @@ abstract public class AnyPicture implements Picture {
 
 	@Override
 	public Pixel getPixel(Coordinate c) {
-		// TODO Auto-generated method stub
+		if(c==null){
+			throw new IllegalArgumentException("Coordinate can't be null");
+		}
 		return getPixel(c.getX(),c.getY());
 	}
 	
