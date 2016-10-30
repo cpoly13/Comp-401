@@ -55,7 +55,7 @@ public class A6AdeptTest {
 	while (sample_iter.hasNext()) {
 	    System.out.println(sample_iter.next().getChar());
 	}
-	String output = "M\n" + "X\n" + "D\n" + "<\n" + ">\n" + "s\n" + ":\n" + "-\n" + ">\n" + ">\n";
+	String output = "M\n" + "X\n" + "D\n" + "<\n" + ">\n" + "s\n" + ":\n" + "-\n" + ">\n" + ">\n +\n";
 
 	assertEquals(output, outContent.toString());
     }

@@ -1,6 +1,6 @@
 package a6jedi;
 
-import java.util.Iterator;
+
 
 public class PictureImpl extends AnyPicture implements Picture {
 	
@@ -37,10 +37,6 @@ public class PictureImpl extends AnyPicture implements Picture {
 		return pixelArray[x][height-1-y];
 
 	}
-
-	
-
-	
 
 	
 	

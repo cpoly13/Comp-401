@@ -1,6 +1,6 @@
 package a6adept;
 
-import java.util.Iterator;
+
 
 public class PictureImpl extends AnyPicture implements Picture {
 	
@@ -10,8 +10,8 @@ public class PictureImpl extends AnyPicture implements Picture {
 		super(width, height);
 		pixelArray = new Pixel[width][height];
 
-		for (int i = 0; i < pixelArray.length; i++) {
-			for (int n = 0; n < pixelArray[0].length; n++) {
+		for (int i = 0; i <width; i++) {
+			for (int n = 0; n < height; n++) {
 				pixelArray[i][n] = new GrayPixel(0.5);
 			}
 		}
