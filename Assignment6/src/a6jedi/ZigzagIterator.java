@@ -40,6 +40,9 @@ public class ZigzagIterator implements Iterator<Pixel> {
 
 	@Override
 	public Pixel next() {
+		if(hasNext()==false){
+			throw new NoSuchElementException();
+		}
 		if(x==-1){
 			x++;
 			return pic.getPixel(x, y);

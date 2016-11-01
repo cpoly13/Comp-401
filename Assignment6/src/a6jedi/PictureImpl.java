@@ -1,6 +1,6 @@
 package a6jedi;
 
-import java.util.Iterator;
+
 
 public class PictureImpl extends AnyPicture implements Picture {
 	

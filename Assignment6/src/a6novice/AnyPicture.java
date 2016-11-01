@@ -60,7 +60,9 @@ abstract public class AnyPicture implements Picture {
 
 			}
 
-			System.out.print("\n");
+			if(i+1<height){
+				System.out.print("\n");
+				}
 
 		}
 		

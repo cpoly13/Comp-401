@@ -74,8 +74,8 @@ abstract public class AnyPicture implements Picture {
 				System.out.print(getPixel(n, i).getChar());
 			}
 			
-			System.out.println();
-			
+				System.out.print("\n");
+
 		}
 	}
 	
