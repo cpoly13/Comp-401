@@ -38,12 +38,4 @@ public class PictureImpl extends AnyPicture implements Picture {
 
 	}
 
-	
-
-	
-
-	
-	
-	
-
 }
