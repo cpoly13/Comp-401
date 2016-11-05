@@ -1,5 +1,8 @@
 package a7;
-
+/*
+ * Region Interface Implementation
+ * Takes a picture and returns various regions determined by Coordinates
+ */
 public class RegionImpl implements Region {
 	private Coordinate a;
 	private Coordinate b;
