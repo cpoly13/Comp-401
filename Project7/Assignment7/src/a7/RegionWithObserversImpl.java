@@ -17,6 +17,7 @@ public class RegionWithObserversImpl implements RegionWithObservers {
 		this.r=r;
 		observers=new ArrayList <ROIObserver>();
 	}
+	
 	@Override
 	public Coordinate getUpperLeft() {
 		
@@ -84,6 +85,12 @@ public class RegionWithObserversImpl implements RegionWithObservers {
 	public List<ROIObserver> getObservers() {
 		
 		return observers;
+	}
+	@Override
+	public void removeAllObservers() {
+		
+		observers.removeAll(observers);
+		
 	}
 	
 	

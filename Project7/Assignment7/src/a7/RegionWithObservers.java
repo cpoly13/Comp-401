@@ -5,4 +5,5 @@ public interface RegionWithObservers extends Region {
 	public void addObservers(ROIObserver a);
 	public void subtractObservers(ROIObserver a);
 	public List<ROIObserver> getObservers ();
+	public void removeAllObservers ();
 }
