@@ -1,9 +1,11 @@
 package a8;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -17,8 +19,21 @@ private PictureView picture_view;
 		picture_view.addMouseListener(this);
 		add(picture_view, BorderLayout.CENTER);
 		
-		JLabel title_label = new JLabel(title);
-		add(title_label, BorderLayout.WEST);
+		JLabel xValue = new JLabel("X:           ");
+		JLabel yValue=new JLabel("Y:           ");
+		JLabel redValue=new JLabel("Red: ");
+		JLabel blueValue=new JLabel("Blue:  ");
+		JLabel greenValue=new JLabel("Green:  ");
+		JLabel brightness=new JLabel("Brightness: ");
+		JPanel please=new JPanel();
+		please.setLayout(new GridLayout(6,1));
+		please.add(xValue);
+		please.add(yValue);
+		please.add(redValue);
+		please.add(greenValue);
+		please.add(blueValue);
+		please.add(brightness);
+		add(please, BorderLayout.WEST);
 	}
 
 	@Override
