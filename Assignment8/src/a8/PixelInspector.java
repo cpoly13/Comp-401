@@ -10,7 +10,7 @@ public class PixelInspector {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		Picture p=A8Helper.readFromURL("http://www.cs.unc.edu/~kmp/kmp.jpg");
-		PixelInspectorWidget temp =new PixelInspectorWidget(p,"Hope this works...");
+		PixelInspectorWidget temp =new PixelInspectorWidget(p);
 		
 		JFrame mainFrame=new JFrame();
 		mainFrame.setTitle("Assignment 8 Pixel Inspector");
