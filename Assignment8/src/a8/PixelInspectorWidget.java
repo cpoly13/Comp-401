@@ -1,6 +1,7 @@
 package a8;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -27,14 +28,15 @@ public class PixelInspectorWidget extends JPanel implements MouseListener {
 		add(picture_view, BorderLayout.CENTER);
 
 		pixelHolder = new ColorPixel(0.5, 0.5, 0.5);
-		xValue = new JLabel("X:                             ");
-		yValue = new JLabel("Y:           ");
+		xValue = new JLabel("X: ");
+		yValue = new JLabel("Y: ");
 		redValue = new JLabel("Red: ");
-		greenValue = new JLabel("Green:  ");
-		blueValue = new JLabel("Blue:  ");
-		brightness = new JLabel("Brightness:   ");
+		greenValue = new JLabel("Green: ");
+		blueValue = new JLabel("Blue: ");
+		brightness = new JLabel("Brightness: ");
 		panel = new JPanel();
 		panel.setLayout(new GridLayout(6, 1));
+		panel.setPreferredSize(new Dimension(100,40));
 		setPanel();
 
 		add(panel, BorderLayout.WEST);
@@ -54,12 +56,12 @@ public class PixelInspectorWidget extends JPanel implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		pixelHolder = picture_view.getPicture().getPixel(e.getX(), e.getY());
-		xValue.setText("X: " + e.getX() + "                    ");
+		xValue.setText("X: " + e.getX());
 		yValue.setText("Y: " + e.getY());
 		redValue.setText("Red: " + Math.round(pixelHolder.getRed() * 100.0) / 100.0);
 		greenValue.setText("Green: " + Math.round(pixelHolder.getGreen() * 100.0) / 100.0);
 		blueValue.setText("Blue: " + Math.round(pixelHolder.getBlue() * 100.0) / 100.0);
-		brightness.setText("Brightness: " + Math.round(pixelHolder.getIntensity() * 100.0) / 100.0 + "  ");
+		brightness.setText("Brightness: " + Math.round(pixelHolder.getIntensity() * 100.0) / 100.0 );
 		setPanel();
 		add(panel, BorderLayout.WEST);
 
