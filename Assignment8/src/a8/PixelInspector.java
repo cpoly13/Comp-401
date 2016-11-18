@@ -10,6 +10,7 @@ public class PixelInspector {
 	public static void main(String[] args) throws IOException {
 		
 		Picture p=A8Helper.readFromURL("http://www.cs.unc.edu/~kmp/kmp.jpg");
+		
 		PixelInspectorWidget pixelWidget =new PixelInspectorWidget(p);
 		
 		JFrame mainFrame=new JFrame();
