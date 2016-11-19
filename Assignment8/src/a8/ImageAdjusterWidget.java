@@ -19,12 +19,14 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 	private Picture editedPic;
 	private JPanel blurPanel;
 	private JPanel satPanel;
+	private JPanel brightPanel;
 	private JPanel gridPanel;
 	private JSlider blurSlider;
 	private JSlider satSlider;
+	private JSlider brightSlider;
 	private final JLabel blur;
 	private final JLabel sat;
-	
+	private final JLabel bright;
 
 	public ImageAdjusterWidget(Picture picture) {
 		setLayout(new BorderLayout());
@@ -34,11 +36,13 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 		editedPic = new PictureImpl(picture.getWidth(), picture.getHeight());
 
 		add(picture_view, BorderLayout.CENTER);
-		gridPanel=new JPanel();
+		gridPanel = new JPanel();
 		blurPanel = new JPanel();
-		satPanel=new JPanel();
+		satPanel = new JPanel();
+		brightPanel = new JPanel();
 		blur = new JLabel("Blur:    ");
-		sat=new JLabel("Saturation:    ");
+		sat = new JLabel("Saturation:    ");
+		bright = new JLabel("Brightness:     ");
 
 		blurSlider = new JSlider(0, 5, 0);
 		blurSlider.setPaintTicks(true);
@@ -46,8 +50,8 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 		blurSlider.setLabelTable(blurSlider.createStandardLabels(1));
 		blurSlider.setPaintLabels(true);
 		blurSlider.addChangeListener(this);
-		
-		satSlider=new JSlider(-100,100,0);
+
+		satSlider = new JSlider(-100, 100, 0);
 		satSlider.setPaintTicks(true);
 		satSlider.setMajorTickSpacing(25);
 		satSlider.setLabelTable(satSlider.createStandardLabels(25));
@@ -55,19 +59,32 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 		satSlider.setPaintLabels(true);
 		satSlider.addChangeListener(this);
 
-		gridPanel.setLayout(new GridLayout(3,1));
-		
+		brightSlider = new JSlider(-100, 100, 0);
+		brightSlider.setPaintTicks(true);
+		brightSlider.setMajorTickSpacing(25);
+		brightSlider.setLabelTable(brightSlider.createStandardLabels(25));
+		brightSlider.setSnapToTicks(true);
+		brightSlider.setPaintLabels(true);
+		brightSlider.addChangeListener(this);
+
+		gridPanel.setLayout(new GridLayout(3, 1));
+
 		blurPanel.setLayout(new BoxLayout(blurPanel, 0));
 		blurPanel.add(blur);
 		blurPanel.add(blurSlider);
-		
-		satPanel.setLayout(new BoxLayout(satPanel,0));
+
+		satPanel.setLayout(new BoxLayout(satPanel, 0));
 		satPanel.add(sat);
 		satPanel.add(satSlider);
-		
+
+		brightPanel.setLayout(new BoxLayout(brightPanel, 0));
+		brightPanel.add(bright);
+		brightPanel.add(brightSlider);
+
 		gridPanel.add(blurPanel);
 		gridPanel.add(satPanel);
-		
+		gridPanel.add(brightPanel);
+
 		add(gridPanel, BorderLayout.SOUTH);
 	}
 
@@ -75,8 +92,10 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 	public void stateChanged(ChangeEvent e) {
 		// TODO Auto-generated method stub
 		int blurValue = blurSlider.getValue();
-		if (blurValue != 0) {
+		int brightValue=brightSlider.getValue();
+		if (blurValue != 0 || brightValue!=0) {
 			blurPicture(blurValue);
+			brightenPicture(brightValue);
 			picture_view.setPicture(editedPic.createObservable());
 		}
 
@@ -87,7 +106,7 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 	}
 
 	public void blurPicture(int value) {
-
+		if(value>0){
 		for (int i = 0; i < editedPic.getWidth(); i++) {
 			for (int n = 0; n < editedPic.getHeight(); n++) {
 
@@ -113,7 +132,7 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 						averageRed += originalPic.getPixel(i, n + count).getRed();
 						divisor++;
 					} catch (Exception e) {
-						
+
 					}
 					try {
 						averageRed += originalPic.getPixel(i, n - count).getRed();
@@ -121,135 +140,133 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 					}
 
 					catch (Exception e) {
-						
+
 					}
-					
+
 					try {
-						averageRed += originalPic.getPixel(i+count, n + count).getRed();
+						averageRed += originalPic.getPixel(i + count, n + count).getRed();
 						divisor++;
 					}
 
 					catch (Exception e) {
-						
+
 					}
-					
+
 					try {
-						averageRed += originalPic.getPixel(i-count, n - count).getRed();
+						averageRed += originalPic.getPixel(i - count, n - count).getRed();
 						divisor++;
 					}
 
 					catch (Exception e) {
-						
+
 					}
-					
+
 					try {
-						averageRed += originalPic.getPixel(i+count, n - count).getRed();
+						averageRed += originalPic.getPixel(i + count, n - count).getRed();
 						divisor++;
 					}
 
 					catch (Exception e) {
-						
+
 					}
-					
+
 					try {
-						averageRed += originalPic.getPixel(i-count, n + count).getRed();
+						averageRed += originalPic.getPixel(i - count, n + count).getRed();
 						divisor++;
 					}
 
 					catch (Exception e) {
-						
+
 					}
 					try {
 						averageGreen += originalPic.getPixel(i - count, n).getGreen();
 					} catch (Exception e) {
-						
+
 					}
 					try {
 						averageGreen += originalPic.getPixel(i + count, n).getGreen();
 					} catch (Exception e) {
-						
+
 					}
 					try {
 						averageGreen += originalPic.getPixel(i, n + count).getGreen();
 					} catch (Exception e) {
-						
+
 					}
 					try {
 						averageGreen += originalPic.getPixel(i, n - count).getGreen();
 					} catch (Exception e) {
-						
+
 					}
-					
+
 					try {
-						averageGreen += originalPic.getPixel(i+count, n + count).getGreen();
+						averageGreen += originalPic.getPixel(i + count, n + count).getGreen();
 					} catch (Exception e) {
-						
+
 					}
-					
+
 					try {
-						averageGreen += originalPic.getPixel(i-count, n - count).getGreen();
+						averageGreen += originalPic.getPixel(i - count, n - count).getGreen();
 					} catch (Exception e) {
-						
+
 					}
-					
+
 					try {
-						averageGreen += originalPic.getPixel(i+count, n - count).getGreen();
+						averageGreen += originalPic.getPixel(i + count, n - count).getGreen();
 					} catch (Exception e) {
-						
+
 					}
-					
+
 					try {
-						averageGreen += originalPic.getPixel(i-count, n + count).getGreen();
+						averageGreen += originalPic.getPixel(i - count, n + count).getGreen();
 					} catch (Exception e) {
-						
+
 					}
-					
-					
+
 					try {
 						averageBlue += originalPic.getPixel(i - count, n).getBlue();
 					} catch (Exception e) {
-						
+
 					}
 					try {
 						averageBlue += originalPic.getPixel(i + count, n).getBlue();
 					} catch (Exception e) {
-						
+
 					}
 					try {
 						averageBlue += originalPic.getPixel(i, n + count).getBlue();
 					} catch (Exception e) {
-						
+
 					}
 					try {
 						averageBlue += originalPic.getPixel(i, n - count).getBlue();
 					} catch (Exception e) {
-						
+
 					}
-					
+
 					try {
 						averageBlue += originalPic.getPixel(i + count, n + count).getBlue();
 					} catch (Exception e) {
-						
+
 					}
-					
+
 					try {
 						averageBlue += originalPic.getPixel(i - count, n - count).getBlue();
 					} catch (Exception e) {
-						
+
 					}
-					
+
 					try {
 						averageBlue += originalPic.getPixel(i + count, n - count).getBlue();
 					} catch (Exception e) {
-						
+
 					}
-					
+
 					try {
 						averageBlue += originalPic.getPixel(i - count, n + count).getBlue();
 					} catch (Exception e) {
-						
+
 					}
-					
 
 				}
 
@@ -259,7 +276,37 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 				editedPic.setPixel(i, n, new ColorPixel(averageRed, averageGreen, averageBlue));
 
 			}
+
 		}
+		}
+		else{
+			for(int i=0; i<editedPic.getWidth();i++){
+				for(int n=0; n<editedPic.getHeight(); n++){
+					editedPic.setPixel(i, n, originalPic.getPixel(i, n));
+				}
+			}
+		}
+
+	}
+
+	public void brightenPicture(int value) {
+
+		if (value != 0) {
+			for (int i = 0; i < editedPic.getWidth(); i++) {
+				for (int n = 0; n < editedPic.getHeight(); n++) {
+					if (value > 0) {
+						Pixel lightened=editedPic.getPixel(i, n).lighten(value/100.0);
+						editedPic.setPixel(i, n, lightened);
+					}
+					else if (value<0){
+						Pixel darkened=editedPic.getPixel(i, n).darken(Math.abs(value)/100.0);
+						editedPic.setPixel(i, n, darkened);
+					}
+
+				}
+			}
+		}
+
 	}
 
 }
