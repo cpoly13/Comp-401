@@ -17,11 +17,14 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 	private PictureView picture_view;
 	private final Picture originalPic;
 	private Picture editedPic;
-	private JPanel panel;
+	private JPanel blurPanel;
+	private JPanel satPanel;
+	private JPanel gridPanel;
 	private JSlider blurSlider;
 	private JSlider satSlider;
 	private final JLabel blur;
 	private final JLabel sat;
+	
 
 	public ImageAdjusterWidget(Picture picture) {
 		setLayout(new BorderLayout());
@@ -31,10 +34,11 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 		editedPic = new PictureImpl(picture.getWidth(), picture.getHeight());
 
 		add(picture_view, BorderLayout.CENTER);
-
-		panel = new JPanel();
+		gridPanel=new JPanel();
+		blurPanel = new JPanel();
+		satPanel=new JPanel();
 		blur = new JLabel("Blur:    ");
-		sat=new JLabel("Saturation    ");
+		sat=new JLabel("Saturation:    ");
 
 		blurSlider = new JSlider(0, 5, 0);
 		blurSlider.setPaintTicks(true);
@@ -46,15 +50,25 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 		satSlider=new JSlider(-100,100,0);
 		satSlider.setPaintTicks(true);
 		satSlider.setMajorTickSpacing(25);
-		satSlider.setLabelTable(blurSlider.createStandardLabels(25));
+		satSlider.setLabelTable(satSlider.createStandardLabels(25));
+		satSlider.setSnapToTicks(true);
 		satSlider.setPaintLabels(true);
 		satSlider.addChangeListener(this);
 
-		panel.setLayout(new BoxLayout(panel, 0));
-		panel.add(blur);
-		panel.add(blurSlider);
+		gridPanel.setLayout(new GridLayout(3,1));
 		
-		add(panel, BorderLayout.SOUTH);
+		blurPanel.setLayout(new BoxLayout(blurPanel, 0));
+		blurPanel.add(blur);
+		blurPanel.add(blurSlider);
+		
+		satPanel.setLayout(new BoxLayout(satPanel,0));
+		satPanel.add(sat);
+		satPanel.add(satSlider);
+		
+		gridPanel.add(blurPanel);
+		gridPanel.add(satPanel);
+		
+		add(gridPanel, BorderLayout.SOUTH);
 	}
 
 	@Override
@@ -88,21 +102,18 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 						divisor++;
 					} catch (Exception e) {
 
-						continue;
 					}
 					try {
 						averageRed += originalPic.getPixel(i + count, n).getRed();
 						divisor++;
 					} catch (Exception e) {
 
-						continue;
 					}
 					try {
 						averageRed += originalPic.getPixel(i, n + count).getRed();
 						divisor++;
 					} catch (Exception e) {
-
-						continue;
+						
 					}
 					try {
 						averageRed += originalPic.getPixel(i, n - count).getRed();
@@ -110,50 +121,135 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 					}
 
 					catch (Exception e) {
+						
+					}
+					
+					try {
+						averageRed += originalPic.getPixel(i+count, n + count).getRed();
+						divisor++;
+					}
 
-						continue;
+					catch (Exception e) {
+						
+					}
+					
+					try {
+						averageRed += originalPic.getPixel(i-count, n - count).getRed();
+						divisor++;
+					}
+
+					catch (Exception e) {
+						
+					}
+					
+					try {
+						averageRed += originalPic.getPixel(i+count, n - count).getRed();
+						divisor++;
+					}
+
+					catch (Exception e) {
+						
+					}
+					
+					try {
+						averageRed += originalPic.getPixel(i-count, n + count).getRed();
+						divisor++;
+					}
+
+					catch (Exception e) {
+						
 					}
 					try {
 						averageGreen += originalPic.getPixel(i - count, n).getGreen();
 					} catch (Exception e) {
-						continue;
+						
 					}
 					try {
 						averageGreen += originalPic.getPixel(i + count, n).getGreen();
 					} catch (Exception e) {
-						continue;
+						
 					}
 					try {
 						averageGreen += originalPic.getPixel(i, n + count).getGreen();
 					} catch (Exception e) {
-						continue;
+						
 					}
 					try {
 						averageGreen += originalPic.getPixel(i, n - count).getGreen();
 					} catch (Exception e) {
-						continue;
+						
 					}
-
+					
+					try {
+						averageGreen += originalPic.getPixel(i+count, n + count).getGreen();
+					} catch (Exception e) {
+						
+					}
+					
+					try {
+						averageGreen += originalPic.getPixel(i-count, n - count).getGreen();
+					} catch (Exception e) {
+						
+					}
+					
+					try {
+						averageGreen += originalPic.getPixel(i+count, n - count).getGreen();
+					} catch (Exception e) {
+						
+					}
+					
+					try {
+						averageGreen += originalPic.getPixel(i-count, n + count).getGreen();
+					} catch (Exception e) {
+						
+					}
+					
+					
 					try {
 						averageBlue += originalPic.getPixel(i - count, n).getBlue();
 					} catch (Exception e) {
-						continue;
+						
 					}
 					try {
 						averageBlue += originalPic.getPixel(i + count, n).getBlue();
 					} catch (Exception e) {
-						continue;
+						
 					}
 					try {
 						averageBlue += originalPic.getPixel(i, n + count).getBlue();
 					} catch (Exception e) {
-						continue;
+						
 					}
 					try {
 						averageBlue += originalPic.getPixel(i, n - count).getBlue();
 					} catch (Exception e) {
-						continue;
+						
 					}
+					
+					try {
+						averageBlue += originalPic.getPixel(i + count, n + count).getBlue();
+					} catch (Exception e) {
+						
+					}
+					
+					try {
+						averageBlue += originalPic.getPixel(i - count, n - count).getBlue();
+					} catch (Exception e) {
+						
+					}
+					
+					try {
+						averageBlue += originalPic.getPixel(i + count, n - count).getBlue();
+					} catch (Exception e) {
+						
+					}
+					
+					try {
+						averageBlue += originalPic.getPixel(i - count, n + count).getBlue();
+					} catch (Exception e) {
+						
+					}
+					
 
 				}
 
