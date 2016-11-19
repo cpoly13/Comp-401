@@ -93,9 +93,11 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 		// TODO Auto-generated method stub
 		int blurValue = blurSlider.getValue();
 		int brightValue=brightSlider.getValue();
-		if (blurValue != 0 || brightValue!=0) {
+		int satValue= satSlider.getValue();
+		if (blurValue != 0 || brightValue!=0 || satValue!=0) {
 			blurPicture(blurValue);
 			brightenPicture(brightValue);
+			saturatePicture(satValue);
 			picture_view.setPicture(editedPic.createObservable());
 		}
 
@@ -307,6 +309,51 @@ public class ImageAdjusterWidget extends JPanel implements ChangeListener {
 			}
 		}
 
+	}
+	
+	public void saturatePicture(int value){
+		if(value!=0){
+			for (int i=0;i<editedPic.getWidth(); i++){
+				for(int n=0; n<editedPic.getHeight();n++){
+					double oldRed= editedPic.getPixel(i, n).getRed();
+					double oldGreen=editedPic.getPixel(i, n).getGreen();
+					double oldBlue=editedPic.getPixel(i, n).getBlue();
+					double brightness=editedPic.getPixel(i, n).getIntensity();
+						if(value<0){
+								double newRed=oldRed*(1.0+(value/100.0))-(brightness*value/100.0);
+								double newGreen=oldGreen*(1.0+(value/100.0))-(brightness*value/100.0);
+								double newBlue=oldBlue*(1.0+(value/100.0))-(brightness*value/100.0);
+								
+								editedPic.setPixel(i, n, new ColorPixel(newRed,newGreen,newBlue));
+						}	
+						else if(value>0){
+							double largestColor;
+							if(oldRed>=oldGreen && oldRed>=oldBlue){
+								largestColor=oldRed;
+							}
+							
+							else if(oldGreen>=oldRed && oldGreen>=oldBlue){
+								largestColor=oldGreen;
+							}
+							
+							else if(oldBlue>=oldRed && oldBlue>=oldGreen){
+								largestColor=oldBlue;
+							}
+							else{
+								throw new RuntimeException("Logic error in finding largest color");
+							}
+							
+							if(largestColor!=0){
+								double newRed=oldRed*((largestColor+((1.0-largestColor)*(value/100.0)))/largestColor);
+								double newGreen=oldGreen*((largestColor+((1.0-largestColor)*(value/100.0)))/largestColor);
+								double newBlue=oldBlue*((largestColor+((1.0-largestColor)*(value/100.0)))/largestColor);
+								
+								editedPic.setPixel(i, n, new ColorPixel(newRed,newGreen,newBlue));
+							}
+						}
+				}
+			}
+		}
 	}
 
 }
