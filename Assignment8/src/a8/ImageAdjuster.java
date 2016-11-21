@@ -12,7 +12,7 @@ public class ImageAdjuster {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		  
-		Picture p=A8Helper.readFromURL("");
+		Picture p=A8Helper.readFromURL("http://www.cs.unc.edu/~kmp/kmp.jpg");
 		ImageAdjusterWidget imageWidget=new ImageAdjusterWidget(p);
 		
 		JFrame mainFrame=new JFrame();
