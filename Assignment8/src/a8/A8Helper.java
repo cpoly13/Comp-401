@@ -1,6 +1,7 @@
 package a8;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -9,7 +10,7 @@ import javax.imageio.ImageIO;
 public class A8Helper {
 
 	public static Picture readFromURL(String url) throws IOException {
-		BufferedImage bi = ImageIO.read(new URL(url));
+		BufferedImage bi = ImageIO.read(new File("Space.jpg"));
 		Picture picture = new PictureImpl(bi.getWidth(), bi.getHeight());
 		for (int x=0; x<bi.getWidth(); x++) {
 			for (int y=0; y<bi.getHeight(); y++) {
