@@ -10,7 +10,7 @@ public class FramePuzzle {
 	
 	
 	public static void main(String args[]) throws IOException{
-		Picture p=A8Helper.readFromURL("");
+		Picture p=A8Helper.readFromURL("http://szepkepek.hu/wp-content/uploads/2015/02/szepkepekbolygo2.jpg");
 		FramePuzzleWidget widget=new FramePuzzleWidget(p);
 		
 		JFrame mainFrame=new JFrame();
@@ -21,9 +21,11 @@ public class FramePuzzle {
 		topPanel.setLayout(new BorderLayout());
 		topPanel.add(widget);
 		
+		
 		mainFrame.setContentPane(topPanel);
 		mainFrame.pack();
 		mainFrame.setVisible(true);
+		
 		
 		System.out.println("Width: "+p.getWidth());
 		System.out.println("Height: "+p.getHeight());
