@@ -70,14 +70,44 @@ public class FramePuzzleWidget extends JPanel implements ChangeListener, MouseLi
 		Coordinate picCoord=getArrayCoordinates(pictureClicked);
 		Coordinate redCoord=getArrayCoordinates(redPicture);
 		
-		System.out.println("PictureView clicked: "+ picCoord.getX()+ " "+picCoord.getY());
-		
-		if(picCoord.getX()==redCoord.getX()){
-			System.out.println("Matching Row");
+		for(int i=0; i<panels.length;i++){
+			for(int n=0; n<panels[0].length; n++){
+				PictureView holder =(PictureView)panels[i][n].getComponent(0);
+				if(checkForRed(holder.getPicture())){
+					redCoord=getArrayCoordinates(holder);
+					break;
+				}
+			}
 			
+		}
+		
+		System.out.println("PictureView clicked: "+ picCoord.getX()+ " "+picCoord.getY());
+		System.out.println("RedTile: "+ redCoord.getX()+ " "+redCoord.getY());
+		
+		if(picCoord.getX()==redCoord.getX()&& picCoord.getY()!=redCoord.getY()){
+			int length=redCoord.getY()-picCoord.getY();
+			System.out.println("Matching Row");
+			System.out.println("Distance: "+length+" Tiles");
 			//panels[picCoord.getX()][picCoord.getY()]=panels[redCoord.getX()][redCoord.getY()];
-			PictureView temp=(PictureView) panels[0][0].getComponent(0);
-			temp.setPicture(redTile.createObservable());
+				PictureView holder=new PictureView(redTile.createObservable());
+				Picture tempo=pictureClicked.getPicture();
+				pictureClicked.setPicture(redTile.createObservable());
+				
+				int count=1;
+				while(length>0){
+					
+				PictureView toChange= (PictureView)	panels[picCoord.getX()][picCoord.getY()+count].getComponent(0);
+				holder=(PictureView) panels[picCoord.getX()][picCoord.getY()+count].getComponent(0);
+				toChange.setPicture(tempo.createObservable());
+				tempo=holder.getPicture();
+				
+				count++;
+				length--;
+			}
+			
+			
+			//PictureView temp=(PictureView) panels[0][0].getComponent(0);
+			//temp.setPicture(redTile.createObservable());
 			
 		}
 		
@@ -98,6 +128,19 @@ public class FramePuzzleWidget extends JPanel implements ChangeListener, MouseLi
 			}
 		}
 		throw new RuntimeException("Logic error in getArrayCoordinates");
+	}
+	
+	public boolean checkForRed(Picture p){
+		boolean red=true;
+		for(int i=0;i<p.getWidth();i++){
+			for(int n=0; n<p.getHeight();n++)
+				if(p.getPixel(i, n).getRed()!=1){
+					red=false;
+					break;
+				}
+				
+		}
+		return red;
 	}
 
 	@Override
